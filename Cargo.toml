@@ -10,4 +10,4 @@ discord-sdk = "0.3.0"
 tokio = {version = "1.21.0",features = ["full"]}
 ctrlc = {version = "3.2.3"}
 futures = { version = "0.3.24",features = ["executor"] }
-battery = "0.7.8"
+parking_lot = { verion = "0.12.1",feautres = ["nightly"] }
