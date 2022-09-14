@@ -37,7 +37,14 @@ impl UserMngr {
         let dscc = self.dsc.clone();
         tokio::task::spawn(async move {
             let mut s = 0;
+            let mut last_update = SystemTime::now();
             loop {
+                let new_time = SystemTime::now();
+                if new_time.duration_since(last_update).unwrap_or(Duration::from_secs(1)) > Duration::from_secs(20) {
+                    println!("probably slept");
+                    *cons.clone().write() = new_time.clone();
+                };
+                last_update = new_time;
                 tokio::time::sleep(Duration::from_secs(5)).await;
                 let w = *stopper.clone().read();
                 // println!("stop : {w}");
